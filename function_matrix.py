@@ -7,7 +7,7 @@ def obtain_generators(matrix):
     for j in range(rows):
         generator = unboud
         for i in range(cols):
-            generator = intersect(generator, matrix[i][j].generator)
+            generator = intersect(generator, matrix[i][j].function.generator)
         generators.append(generator)
     return generators
 
@@ -21,6 +21,6 @@ def evaluate(matrix, generators):
     for i in range(cols):
         row = []
         for j in range(rows):
-            row.append(matrix[i][j].function(values[j]))
+            row.append(matrix[i][j].function.function(values[j]))
         result.append(row)
     return result
