@@ -16,10 +16,18 @@ class Function:
 class Power(Function):
     def __init__(self, r):
         super().__init__(generator.positive, lambda x : math.pow(x, r))
+        self.r = r
+
+    def __str__(self):
+        return "x^" + str(self.r)
 
 class Exponential(Function):
     def __init__(self, a):
         super().__init__(generator.unboud, lambda x: math.pow(a, x))
+        self.a = a
+
+    def __str__(self):
+        return str(self.a) + "^x"
 
 sqrt    = Function(generator.absolute, lambda x: math.sqrt(x), "√(x)")
 
@@ -55,4 +63,4 @@ arccosh = Function(generator.arccosh, lambda x: math.acosh(x), "arccosh(x)")
 
 arctanh = Function(generator.inverse_trigonometric, lambda x: math.atanh(x), "arctanh(x)")
 
-positive_id = Function(generator.absolute, lambda x: x)
+positive_id = Function(generator.absolute, lambda x: x, "x")
