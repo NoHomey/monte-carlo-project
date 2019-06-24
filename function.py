@@ -47,3 +47,5 @@ arcsinh = Function(generator.unboud, lambda x: math.asinh(x))
 arccosh = Function(generator.arccosh, lambda x: math.acosh(x))
 
 arctanh = Function(generator.inverse_trigonometric, lambda x: math.atanh(x))
+
+positive_id = Function(generator.absolute, lambda x: x)
