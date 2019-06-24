@@ -14,14 +14,13 @@ def obtain_generators(matrix):
         generators.append(generator)
     return generators
 
-def normalize(matrix, generators, rel_symbols, values):
+def normalize(matrix, rel_symbols, values):
     cols = len(matrix)
     rows = len(matrix[0])
     for i in range(cols):
         rel_symbol = rel_symbols[i]
         if rel_symbol != RelationSymbol.Equal:
             coefient = 1 if rel_symbol == RelationSymbol.LessThanOrEqual else -1
-            generators.append(absolute)
             for k in range(cols):
                 matrix[k].append(MatrixEntry(coefient if i == k else 0, positive_id))
 
@@ -33,8 +32,10 @@ def evaluate(matrix, generators):
         values.append(generators[i].generate())
     result = []
     for i in range(cols):
-        row = []
+        row_sum = 0
         for j in range(rows):
-            row.append(matrix[i][j].function.function(values[j]))
-        result.append(row)
+            value = matrix[i][j].function.function(values[j])
+            coeficient = matrix[i][j].coeficient
+            row_sum += coeficient * value
+        result.append(row_sum)
     return result

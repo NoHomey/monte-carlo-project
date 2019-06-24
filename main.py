@@ -12,6 +12,8 @@ rel_symbols = [RelationSymbol.GreaterThanOrEqual, RelationSymbol.LessThanOrEqual
 
 values = [2, 3]
 
+function_matrix.normalize(matrix, rel_symbols, values)
+
 generators = function_matrix.obtain_generators(matrix)
 
-function_matrix.normalize(matrix, generators, rel_symbols, values)
+res = function_matrix.evaluate(matrix, generators)
