@@ -1,3 +1,5 @@
+import math
+
 from generator import unboud, absolute, intersect
 from relation_symbol import RelationSymbol
 from matrix_entry import MatrixEntry
@@ -44,3 +46,14 @@ def evaluate(matrix, generators):
         except:
             # overflow error, ignore and try again
             pass
+
+def __dustance_func_helper__(a, b, p):
+    sum = 0.0
+    for i in range(len(a)):
+        # | a - b | ^ p
+        sum += math.abs(a[i] - b[i]) ** p
+
+    return sum ** (1.0 / p)
+    
+def distance(p):
+    return lambda a, b: __dustance_func_helper__(a, b, p)
