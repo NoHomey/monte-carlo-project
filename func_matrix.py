@@ -1,26 +1,26 @@
 from generator import unboud, intersect
 
-def generators(matrix):
-    m = len(matrix)
-    n = len(matrix[0])
-    gens = []
-    for j in range(n):
+def obtain_generators(matrix):
+    cols = len(matrix)
+    rows = len(matrix[0])
+    generators = []
+    for j in range(rows):
         generator = unboud
-        for i in range(m):
+        for i in range(cols):
             generator = intersect(generator, matrix[i][j].generator)
-        gens.append(generator)
-    return gens
+        generators.append(generator)
+    return generators
 
-def calc(matrix, gens):
-    m = len(matrix)
-    n = len(matrix[0])
-    vals = []
-    for i in range(n):
-        vals.append(gens[i].generate())
-    res = []
-    for i in range(m):
+def evaluate(matrix, generators):
+    cols = len(matrix)
+    rows = len(matrix[0])
+    values = []
+    for i in range(rows):
+        values.append(generators[i].generate())
+    result = []
+    for i in range(cols):
         row = []
-        for j in range(n):
-            row.append(matrix[i][j].function(vals[j]))
-        res.append(row)
-    return res
+        for j in range(rows):
+            row.append(matrix[i][j].function(values[j]))
+        result.append(row)
+    return result
