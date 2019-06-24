@@ -22,5 +22,5 @@ inverse_trigonometric = Generator(-1, 1)
 
 arccosh = Generator(1, float_info.max)
 
-def union(genA, genB):
+def intersect(genA, genB):
     return Generator(max(genA.left, genB.left), min(genA.right, genB.right))

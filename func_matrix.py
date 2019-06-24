@@ -1,4 +1,4 @@
-from generator import unboud, union
+from generator import unboud, intersect
 
 def generators(matrix):
     m = len(matrix)
@@ -7,7 +7,7 @@ def generators(matrix):
     for j in range(n):
         gen = unboud
         for i in range(m):
-            gen = union(gen, matrix[i][j].gen)
+            gen = intersect(gen, matrix[i][j].gen)
         gens.append(gen)
     return gens
 
