@@ -1,3 +1,5 @@
+import math
+
 from generator import unboud, absolute, intersect
 from relation_symbol import RelationSymbol
 from matrix_entry import MatrixEntry
