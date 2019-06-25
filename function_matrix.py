@@ -31,10 +31,10 @@ def evaluate(matrix, values):
     rows = len(matrix[0])
     result = []
     for i in range(cols):
-        row_sum = 0
+        row_sum = 0.0
         for j in range(rows):
             value = matrix[i][j].function.function(values[j])
             coeficient = matrix[i][j].coeficient
             row_sum += coeficient * value
-            result.append(row_sum)
+        result.append(row_sum)
     return result

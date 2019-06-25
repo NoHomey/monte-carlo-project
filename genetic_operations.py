@@ -1,10 +1,11 @@
 from function_matrix import evaluate
 
-def __generate_values__(count, generators):
+def __generate_values__(generators):
     count = len(generators)
     values = []
     for i in range(count):
-        values.append(generators[i].generate())
+        value = generators[i].generate()
+        values.append(value)
     return values
 
 def generate(matrix, generators, creator, target):
@@ -13,6 +14,7 @@ def generate(matrix, generators, creator, target):
 def __mutate_values__(values, index, generators):
     new_values = values.copy()
     new_values[index] = generators[index].generate()
+    return new_values
 
 def mutate(matrix, generators, values, index, creator, target):
     values_creator = lambda generators: __mutate_values__(values, index, generators)
@@ -25,5 +27,9 @@ def __create_individual__(matrix, values_creator, generators, individual_creator
             result = evaluate(matrix, values)
             return individual_creator(values, result, target)
         except:
-            # overflow error, ignore and try again
             pass
+        #except Exception as inst:
+        #    print(type(inst))    # the exception instance
+        #    print(inst.args)     # arguments stored in .args
+        #    print(inst)
+        #    raise inst
