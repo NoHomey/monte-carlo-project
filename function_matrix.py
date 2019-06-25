@@ -24,23 +24,15 @@ def normalize(matrix, rel_symbols, values):
             for k in range(cols):
                 matrix[k].append(MatrixEntry(coefient if i == k else 0, positive_id))
 
-def evaluate(matrix, generators):
-    while True:
-        try:
-            cols = len(matrix)
-            rows = len(matrix[0])
-            values = []
-            for i in range(rows):
-                values.append(generators[i].generate())
-            result = []
-            for i in range(cols):
-                row_sum = 0
-                for j in range(rows):
-                    value = matrix[i][j].function.function(values[j])
-                    coeficient = matrix[i][j].coeficient
-                    row_sum += coeficient * value
-                result.append(row_sum)
-            return result
-        except:
-            # overflow error, ignore and try again
-            pass
+def evaluate(matrix, values):
+    cols = len(matrix)
+    rows = len(matrix[0])
+    result = []
+    for i in range(cols):
+        row_sum = 0
+        for j in range(rows):
+            value = matrix[i][j].function.function(values[j])
+            coeficient = matrix[i][j].coeficient
+            row_sum += coeficient * value
+            result.append(row_sum)
+    return result
