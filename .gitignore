@@ -104,3 +104,7 @@ venv.bak/
 .mypy_cache/
 
 XDG_CACHE_HOME
+
+# IDE support
+.idea
+.vscode
