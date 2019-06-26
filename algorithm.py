@@ -5,7 +5,7 @@ from genetic_operations import GeneticOperations
 
 
 def main_algorithm(min_population: int, max_population: int, num_iterations: int, start_tolerance: float,
-                   genetic_operations: GeneticOperations):
+                   genetic_operations: GeneticOperations, mutation_probability: float, selection_probability: float):
 
     assert min_population <= max_population
 
@@ -13,8 +13,15 @@ def main_algorithm(min_population: int, max_population: int, num_iterations: int
 
     current_tolerance = start_tolerance
 
-    initial_population: List = generate_population(genetic_operations, min_population)
+    population: List = generate_population(genetic_operations, min_population)
 
+    for iteration in range(num_iterations):
+        mutate_population(genetic_operations, population, mutation_probability)
+        next_generation = generate_population(genetic_operations, min_population)
+        population.extend(next_generation)
+        population = select_individuals(population, min_population, max_population, selection_probability)
+
+    return population
 
 def generate_population(genetic_operations: GeneticOperations, size: int) -> List:
 
