@@ -5,6 +5,7 @@ from relation_symbol import RelationSymbol
 from genetic_operations import GeneticOperations
 from distance import distance
 from individual import individual_creator
+from generator import Generator
 
 matrix = [
     [MatrixEntry(2, function.sin), MatrixEntry(3, function.Power(3))],
@@ -24,6 +25,8 @@ creator = individual_creator(distance(2))
 evaluate = function_matrix.evaluate(matrix)
 
 genetic_operation = GeneticOperations(evaluate, generators, creator, target)
+
+Generator.set_limits(-100, 100)
 
 gen = genetic_operation.generate()
 
