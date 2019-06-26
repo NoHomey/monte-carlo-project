@@ -2,7 +2,7 @@ import function
 import function_matrix
 from matrix_entry import MatrixEntry
 from relation_symbol import RelationSymbol
-from genetic_operations import generate, mutate
+from genetic_operations import GeneticOperations
 from distance import distance
 from individual import individual_creator
 
@@ -23,4 +23,8 @@ creator = individual_creator(distance(2))
 
 evaluate = function_matrix.evaluate(matrix)
 
-gen = generate(evaluate, generators, creator, target)
+genetic_operation = GeneticOperations(evaluate, generators, creator, target)
+
+gen = genetic_operation.generate()
+
+mut = genetic_operation.mutate(gen.values, 2)

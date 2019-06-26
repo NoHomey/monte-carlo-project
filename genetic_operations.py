@@ -1,33 +1,40 @@
-def __generate_values__(generators):
-    count = len(generators)
-    values = []
-    for i in range(count):
-        value = generators[i].generate()
-        values.append(value)
-    return values
+class GeneticOperations:
+    def __init__(self, evaluate, generators, individual_creator, target):
+        self.evaluate = evaluate
+        self.generators = generators
+        self.generators_len = len(generators)
+        self.individual_creator = individual_creator
+        self.target = target
 
-def generate(evaluate, generators, creator, target):
-    return __create_individual__(evaluate, __generate_values__, generators, creator, target)
+    def generate(self):
+        return self.__create_individual__(self.__generate_values__)
 
-def __mutate_values__(values, index, generators):
-    new_values = values.copy()
-    new_values[index] = generators[index].generate()
-    return new_values
+    def mutate(self, values, index):
+        values_creator = lambda : self.__mutate_values__(values, index)
+        return self.__create_individual__(values_creator)
 
-def mutate(evaluate, generators, values, index, creator, target):
-    values_creator = lambda generators: __mutate_values__(values, index, generators)
-    return __create_individual__(evaluate, values_creator, generators, creator, target)
+    def __generate_values__(self):
+        values = []
+        for i in range(self.generators_len):
+            value = self.generators[i].generate()
+            values.append(value)
+        return values
 
-def __create_individual__(evaluate, values_creator, generators, individual_creator, target):
-    while True:
-        try:
-            values = values_creator(generators)
-            result = evaluate(values)
-            return individual_creator(values, result, target)
-        except:
-            pass
-        #except Exception as inst:
-        #    print(type(inst))    # the exception instance
-        #    print(inst.args)     # arguments stored in .args
-        #    print(inst)
-        #    raise inst
+    def __mutate_values__(self, values, index):
+        new_values = values.copy()
+        new_values[index] = self.generators[index].generate()
+        return new_values
+
+    def __create_individual__(self, values_creator):
+        while True:
+            try:
+                values = values_creator()
+                result = self.evaluate(values)
+                return self.individual_creator(values, result, self.target)
+            except:
+                pass
+            #except Exception as inst:
+            #    print(type(inst))    # the exception instance
+            #    print(inst.args)     # arguments stored in .args
+            #    print(inst)
+            #    raise inst
