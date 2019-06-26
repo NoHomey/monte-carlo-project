@@ -6,6 +6,7 @@ from genetic_operations import GeneticOperations
 from distance import distance
 from individual import individual_creator
 from generator import Generator
+from algorithm import generate_population, mutate_population
 
 matrix = [
     [MatrixEntry(2, function.sin), MatrixEntry(3, function.Power(3))],
@@ -24,10 +25,14 @@ creator = individual_creator(distance(2))
 
 evaluate = function_matrix.evaluate(matrix)
 
-genetic_operation = GeneticOperations(evaluate, generators, creator, target)
+genetic_operations = GeneticOperations(evaluate, generators, creator, target)
 
 Generator.set_limits(-100, 100)
 
-gen = genetic_operation.generate()
+population = generate_population(genetic_operations, 5)
 
-mut = genetic_operation.mutate(gen.values, 2)
+print(population)
+
+mutate_population(genetic_operations, population, 0.3)
+
+print(population)

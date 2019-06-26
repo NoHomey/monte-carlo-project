@@ -13,13 +13,33 @@ def main_algorithm(min_population: int, max_population: int, num_iterations: int
 
     current_tolerance = start_tolerance
 
-    initial_population: List = create_initial_population(genetic_operations, min_population)
+    initial_population: List = generate_population(genetic_operations, min_population)
 
 
-def create_initial_population(genetic_operations: GeneticOperations, size: int) -> List:
+def generate_population(genetic_operations: GeneticOperations, size: int) -> List:
 
     population: List = [genetic_operations.generate() for _ in range(size)]
 
+    return population
+
+
+def mutate_population(genetic_operations: GeneticOperations, population: List, probability: float) -> List:
+    
+    count = len(population)
+
+    values_count = genetic_operations.generators_len
+
+    for i in range(count):
+        if random.random() < probability:
+            mutation_probability = random.random()
+            step = 1 / values_count
+            current = step
+            for j in range(values_count):
+                if mutation_probability < current:
+                    population.append(genetic_operations.mutate(population[i].values, j))
+                    break
+                current += step
+    
     return population
 
 
