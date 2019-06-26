@@ -21,4 +21,6 @@ generators = function_matrix.obtain_generators(matrix)
 
 creator = individual_creator(distance(2))
 
-gen = generate(matrix, generators, creator, target)
+evaluate = function_matrix.evaluate(matrix)
+
+gen = generate(evaluate, generators, creator, target)

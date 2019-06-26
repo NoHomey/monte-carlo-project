@@ -26,7 +26,7 @@ def normalize(matrix, rel_symbols, values):
             for k in range(cols):
                 matrix[k].append(MatrixEntry(coefient if i == k else 0, positive_id))
 
-def evaluate(matrix, values):
+def __evaluate__(matrix, values):
     cols = len(matrix)
     rows = len(matrix[0])
     result = []
@@ -38,3 +38,6 @@ def evaluate(matrix, values):
             row_sum += coeficient * value
         result.append(row_sum)
     return result
+
+def evaluate(matrix):
+    return lambda values: __evaluate__(matrix, values)
