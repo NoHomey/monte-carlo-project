@@ -1,4 +1,4 @@
-from random import random
+import random
 from typing import List
 
 from genetic_operations import GeneticOperations
@@ -6,6 +6,8 @@ from genetic_operations import GeneticOperations
 
 def main_algorithm(min_population: int, max_population: int, num_iterations: int, start_tolerance: float,
                    genetic_operations: GeneticOperations):
+
+    assert min_population <= max_population
 
     decreasing_step_tolerance = start_tolerance / num_iterations
 
@@ -29,12 +31,12 @@ def select_individuals(population: List, number_of_individuals: int,  max_pupula
 
     for individual in population:
 
-        if(max_pupulation > len(selected)):
+        if(len(selected) >= max_pupulation):
             break
 
         if random.random() < probability:
             selected.append(individual)
-            
+
     return selected
 
 
@@ -42,4 +44,4 @@ def select_best_individuals(population: List, number_of_individuals: int) -> Lis
 
     population.sort()
 
-    return [population.pop(0) in range(number_of_individuals)]
+    return [population.pop(0) for _ in range(number_of_individuals)]

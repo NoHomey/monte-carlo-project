@@ -8,6 +8,12 @@ class Individual:
     def __lt__(self, other):
         return self.score < other.score
 
+    def __str__(self):
+        return self.__repr__()
+
+    def __repr__(self):
+        return "Individual(" + str(self.score) + ")"
+
 
 def create_individual(values, result, distance_function, target):
     score = distance_function(result, target)
