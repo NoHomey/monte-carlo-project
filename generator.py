@@ -27,7 +27,7 @@ unboud = Generator("min", "max")
 
 absolute = Generator(0, "max")
 
-radian = Generator(0, 2 * math.pi)
+radian = unboud
 
 inverse_trigonometric = Generator(-1, 1)
 
