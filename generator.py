@@ -4,11 +4,11 @@ import math
 __epsilon__ = 0.0000000001
 
 class Generator:
-    max_value = 10000000000000
-    min_value = -max_value
+    max_value: float = 10000000000000
+    min_value: float = -max_value
 
     @staticmethod
-    def set_limits(min_value, max_value):
+    def set_limits(min_value: float, max_value: float):
         Generator.min_value = min_value
         Generator.max_value = max_value
 
@@ -16,10 +16,19 @@ class Generator:
         self.left = left
         self.right = right
 
-    def generate(self):
+    def generate(self) -> float:
+        (left, right) = self.__limits__()
+        return uniform(left, right)
+
+    def is_in_range(self, num: float) -> bool:
+        (left, right) = self.__limits__()
+        return num >= left and num <= right
+
+    def __limits__(self) -> (float, float):
         left = Generator.min_value if self.left == "min" else self.left
         right = Generator.max_value if self.right == "max" else self.right
-        return uniform(left, right)
+        return (left, right)
+
 
 positive = Generator(__epsilon__, "max")
 

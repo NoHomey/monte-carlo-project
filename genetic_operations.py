@@ -13,6 +13,18 @@ class GeneticOperations:
         values_creator = lambda : self.__mutate_values__(values, index)
         return self.__create_individual__(values_creator)
 
+    def is_in_range(self, value, index):
+        return self.generators[index].is_in_range(value)
+
+    def change(self, values, index, value):
+        new_values = values.copy()
+        new_values[index] = value
+        try:
+            result = self.evaluate(new_values)
+            return self.individual_creator(new_values, result, self.target)
+        except:
+            return self.mutate(values, index)
+
     def __generate_values__(self):
         values = []
         for i in range(self.generators_len):
