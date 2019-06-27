@@ -16,6 +16,8 @@ rel_symbols = [RelationSymbol.GreaterThanOrEqual, RelationSymbol.LessThanOrEqual
 
 target = [2, 3]
 
+variables_count = len(matrix[0])
+
 function_matrix.normalize(matrix, rel_symbols, target)
 
 generators = function_matrix.obtain_generators(matrix)
@@ -44,6 +46,8 @@ for i in range(10):
     population = main_algorithm(population, min_population, max_population, num_iterations, limit, genetic_operations, mutation_probability, selection_probability)
     limit *= 10
 
-print(population[0])
+solutions = [individual.values[0:variables_count] for individual in population]
 
-print(population[0].values)
+print('best solution', solutions[0])
+
+print('score', population[0].score)
