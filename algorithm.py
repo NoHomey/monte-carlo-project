@@ -6,7 +6,7 @@ from genetic_operations import GeneticOperations
 from individual import Individual
 
 
-def main_algorithm(min_population: int, max_population: int, num_iterations: int, limit: float,
+def main_algorithm(population: List, min_population: int, max_population: int, num_iterations: int, limit: float,
                    genetic_operations: GeneticOperations, mutation_probability: float, selection_probability: float):
 
     assert min_population <= max_population
@@ -19,8 +19,6 @@ def main_algorithm(min_population: int, max_population: int, num_iterations: int
     decreasing_step_tolerance = start_tolerance / num_iterations
 
     current_tolerance = start_tolerance
-
-    population: List = generate_population(genetic_operations, min_population)
 
     for iteration in range(num_iterations):
         mutate_population(genetic_operations, population, mutation_probability, current_tolerance)
@@ -62,14 +60,17 @@ def mutate_individual(genetic_operations: GeneticOperations, individual: Individ
     assert tolerance > 0
 
     values = individual.values
-    while True:
+
+    for i in range(100):
         change_in_value = random.uniform(-tolerance, tolerance)
         new_value = individual.values[value_index] + change_in_value
         if genetic_operations.is_in_range(new_value, value_index):
-            if random.random() < 0.7:
+            if random.random() < 0.6:
                 return genetic_operations.change(values, value_index, new_value)
             else:
                 return genetic_operations.mutate(values, value_index)
+
+    return genetic_operations.mutate(values, value_index)
 
 def select_individuals(population: List, number_of_individuals: int,  max_pupulation: int, probability: float) -> List:
 
