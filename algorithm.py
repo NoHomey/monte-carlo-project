@@ -14,6 +14,7 @@ def main_algorithm(population: List, min_population: int, max_population: int, n
 
     Generator.set_limits(-limit, limit)
 
+    # start with about a third of the limit, so we have room to change...
     start_tolerance = 0.3 * limit
 
     decreasing_step_tolerance = start_tolerance / num_iterations
@@ -65,7 +66,8 @@ def mutate_individual(genetic_operations: GeneticOperations, individual: Individ
         change_in_value = random.uniform(-tolerance, tolerance)
         new_value = individual.values[value_index] + change_in_value
         if genetic_operations.is_in_range(new_value, value_index):
-            if random.random() < 0.6:
+            # change calls mutate internally, this is not a magic number of high importance
+            if random.random() < 0.7:
                 return genetic_operations.change(values, value_index, new_value)
             else:
                 return genetic_operations.mutate(values, value_index)
