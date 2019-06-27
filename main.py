@@ -30,7 +30,7 @@ evaluate = function_matrix.evaluate(matrix)
 
 genetic_operations = GeneticOperations(evaluate, generators, creator, target)
 
-min_population = 20
+min_population = 100
 
 max_population = 200
 
@@ -49,6 +49,8 @@ for i in tqdm(range(10)):
     limit *= 10
 
 solutions = [individual.values[0:variables_count] for individual in population]
+
+print()
 
 print('best solution', solutions[0])
 
