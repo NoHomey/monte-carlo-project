@@ -1,6 +1,8 @@
 import random
 from typing import List
 
+from tqdm import tqdm
+
 from generator import Generator
 from genetic_operations import GeneticOperations
 from individual import Individual
@@ -21,7 +23,7 @@ def main_algorithm(population: List, min_population: int, max_population: int, n
 
     current_tolerance = start_tolerance
 
-    for iteration in range(num_iterations):
+    for iteration in tqdm(range(num_iterations)):
         mutate_population(genetic_operations, population, mutation_probability, current_tolerance)
         next_generation = generate_population(genetic_operations, min_population)
         population.extend(next_generation)

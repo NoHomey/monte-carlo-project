@@ -1,3 +1,5 @@
+from tqdm import tqdm
+
 import function
 import function_matrix
 from matrix_entry import MatrixEntry
@@ -42,7 +44,7 @@ limit = 100
 
 population = generate_population(genetic_operations, min_population)
 
-for i in range(10):
+for i in tqdm(range(10)):
     population = main_algorithm(population, min_population, max_population, num_iterations, limit, genetic_operations, mutation_probability, selection_probability)
     limit *= 10
 
